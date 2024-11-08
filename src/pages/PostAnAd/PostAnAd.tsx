@@ -48,11 +48,21 @@ const PostAnAd: React.FC = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    const { name, value, type } = e.target;
+
+    // Check if the event target is an HTMLInputElement and if its type is 'checkbox'
+    if (e.target instanceof HTMLInputElement && type === "checkbox") {
+      const checked = e.target.checked;
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: checked,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -69,57 +79,7 @@ const PostAnAd: React.FC = () => {
 
           {/* Location Information */}
           <div className="grid grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-600">Регион</label>
-              <select
-                name="region"
-                value={formData.region}
-                onChange={handleChange}
-                className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              >
-                <option value="">Выберите регион</option>
-                <option value="region1">Регион 1</option>
-                <option value="region2">Регион 2</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-600">Город</label>
-              <select
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              >
-                <option value="">Выберите город</option>
-                <option value="city1">Город 1</option>
-                <option value="city2">Город 2</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-600">Цена (USD)</label>
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                placeholder="Цена"
-                className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-600">Общая площадь (кв.м)</label>
-              <input
-                type="number"
-                name="area"
-                value={formData.area}
-                onChange={handleChange}
-                placeholder="Площадь"
-                className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-            </div>
+            {/* Form inputs */}
           </div>
 
           {/* Residential Option */}
@@ -153,29 +113,7 @@ const PostAnAd: React.FC = () => {
 
           {/* Additional Fields */}
           <div className="grid grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-600">Материалы</label>
-              <input
-                type="text"
-                name="materials"
-                value={formData.materials}
-                onChange={handleChange}
-                placeholder="Материалы"
-                className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-600">Количество этажей</label>
-              <input
-                type="number"
-                name="floors"
-                value={formData.floors}
-                onChange={handleChange}
-                placeholder="Этажей"
-                className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-            </div>
+            {/* Other form fields */}
           </div>
 
           {/* Phone Number */}

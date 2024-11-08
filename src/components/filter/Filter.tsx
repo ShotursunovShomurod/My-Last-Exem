@@ -1,158 +1,124 @@
-import React, { useState } from "react";
+import  { useState } from "react";
+import logo from "../../images/full-logo-to-home.svg";
+import humburger from "../../assets/Menu.png";
 
-interface FormData {
-  region: string;
-  city: string;
-  neighborhood: string;
-  street: string;
-  houseNumber: string;
-  price: number | "";
-  area: number | "";
-  residential: boolean;
-  prepayment: string;
-  materials: string;
-  floors: number | "";
-  yearBuilt: number | "";
-  ceilingHeight: number | "";
-  heatingType: string;
-  coolingType: string;
-  repair: string;
-  hasBalcony: boolean;
-  phoneNumber: string;
-  additionalInfo: string;
-}
+const Filter: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<string>("Продажа");
+  const [isRemontSelected, setIsRemontSelected] = useState<boolean>(false);
 
-const PostAnAd: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    region: "",
-    city: "",
-    neighborhood: "",
-    street: "",
-    houseNumber: "",
-    price: "",
-    area: "",
-    residential: true,
-    prepayment: "",
-    materials: "",
-    floors: "",
-    yearBuilt: "",
-    ceilingHeight: "",
-    heatingType: "",
-    coolingType: "",
-    repair: "",
-    hasBalcony: false,
-    phoneNumber: "",
-    additionalInfo: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value, type } = e.target;
-
-    // Check if the event target is an HTMLInputElement and if its type is 'checkbox'
-    if (e.target instanceof HTMLInputElement && type === "checkbox") {
-      const checked = e.target.checked;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: checked,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+  const handleFilterClick = (filter: string) => {
+    setActiveFilter(filter);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(formData);
+  const handleRemontSelect = () => {
+    setIsRemontSelected(!isRemontSelected);
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-4xl bg-white p-10 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-8 text-center">Разместить объявление</h1>
-        <form onSubmit={handleSubmit}>
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Продажа</h2>
+    <div className="fixed top-0 left-0 w-[400px] h-screen px-[38px] pt-[38px] bg-white shadow-lg">
+      <div className="mb-[35px]">
+        <img className="cursor-pointer" src={humburger} alt="Menu" />
+      </div>
 
-          {/* Location Information */}
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            {/* Form inputs */}
-          </div>
+      <div className="border-b pb-[26px] mb-[33px]">
+        <img src={logo} alt="Utopia logo" />
+      </div>
 
-          {/* Residential Option */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-600">Жилой</label>
-            <div className="flex items-center mt-2">
-              <label className="mr-4">
-                <input
-                  type="radio"
-                  name="residential"
-                  value="yes"
-                  checked={formData.residential === true}
-                  onChange={() => setFormData((prevData) => ({ ...prevData, residential: true }))}
-                  className="mr-1"
-                />
-                Да
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="residential"
-                  value="no"
-                  checked={formData.residential === false}
-                  onChange={() => setFormData((prevData) => ({ ...prevData, residential: false }))}
-                  className="mr-1"
-                />
-                Нет
-              </label>
-            </div>
-          </div>
+      <p className="text-lg font-semibold mb-[33px]">Фильтр</p>
 
-          {/* Additional Fields */}
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            {/* Other form fields */}
-          </div>
-
-          {/* Phone Number */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-600">Номер телефона</label>
-            <input
-              type="text"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              placeholder="+998"
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            />
-          </div>
-
-          {/* Additional Information */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-600">Дополнительная информация</label>
-            <textarea
-              name="additionalInfo"
-              value={formData.additionalInfo}
-              onChange={handleChange}
-              placeholder="Введите текст"
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              rows={3}
-            />
-          </div>
-
-          {/* Submit Button */}
+      <div className="flex items-center gap-3 mb-[30px]">
+        {["Продажа", "Аренда", "Сожит."].map((filter) => (
           <button
-            type="submit"
-            className="w-full bg-yellow-400 text-white p-3 rounded-lg font-semibold hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            key={filter}
+            onClick={() => handleFilterClick(filter)}
+            className={`px-4 py-2 rounded-md ${
+              activeFilter === filter
+                ? "bg-[#FCA311] text-white"
+                : "bg-[#F3F3F3]"
+            }`}
           >
-            Опубликовать
+            {filter}
           </button>
-        </form>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-4 mb-5">
+        {["Категория недвижимости", "Область", "Район"].map((label, idx) => (
+          <select
+            key={idx}
+            className="w-full px-4 py-2 bg-[#F3F3F3] rounded-md cursor-pointer"
+          >
+            <option>{label}</option>
+          </select>
+        ))}
+
+        <select
+          onChange={handleRemontSelect}
+          className="w-full px-4 py-2 bg-[#F3F3F3] rounded-md cursor-pointer"
+        >
+          <option>Ремонт</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </div>
+
+      <div className="flex items-center justify-between mb-5 transition-all duration-300 ease-in-out">
+        <label className="flex-grow mr-4">Комнат</label>
+        <input
+          type="number"
+          placeholder="от"
+          className="w-20 px-2 py-2 bg-[#F3F3F3] rounded-md text-center"
+        />
+        <span className="mx-2">до</span>
+        <input
+          type="number"
+          placeholder="до"
+          className="w-20 px-2 py-2 bg-[#F3F3F3] rounded-md text-center"
+        />
+      </div>
+      <div className="flex items-center justify-between mb-5">
+        <label className="flex-grow mr-4">Площадь</label>
+        <input
+          type="number"
+          placeholder="от"
+          className="w-20 px-2 py-2 bg-[#F3F3F3] rounded-md text-center"
+        />
+        <span className="mx-2">до</span>
+        <input
+          type="number"
+          placeholder="до"
+          className="w-20 px-2 py-2 bg-[#F3F3F3] rounded-md text-center"
+        />
+        <span className="ml-2">м²</span>
+      </div>
+
+      
+      <select
+          className="w-full px-4 py-2 bg-[#F3F3F3] rounded-md cursor-pointer"
+        >
+          <option>Рядом</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+      <p className="mb-[11px] font-medium">Комиссионные</p>
+      <div className="flex items-center justify-between pl-5 mb-6 gap-[45px]">
+        <div className="flex gap-[34px]">
+        <div className="flex items-center gap-2">
+          <label>Да</label>
+          <input type="radio" name="commission" className="cursor-pointer" />
+        </div>
+        <div className="flex items-center gap-2">
+          <label>Нет</label>
+          <input type="radio" name="commission" className="cursor-pointer" />
+        </div>
+        </div>
+        <button className="w-full py-3 font-semibold text-white bg-[#FCA311] rounded-md">
+          Применить
+        </button>
       </div>
     </div>
   );
 };
 
-export default PostAnAd;
+export default Filter;
