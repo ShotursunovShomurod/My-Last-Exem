@@ -1,6 +1,7 @@
 import  { useState } from "react";
 import logo from "../../images/full-logo-to-home.svg";
 import humburger from "../../assets/Menu.png";
+import { Link } from "react-router-dom";
 
 const Filter: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>("Продажа");
@@ -21,7 +22,9 @@ const Filter: React.FC = () => {
       </div>
 
       <div className="border-b pb-[26px] mb-[33px]">
+        <Link to="/">
         <img src={logo} alt="Utopia logo" />
+        </Link>
       </div>
 
       <p className="text-lg font-semibold mb-[33px]">Фильтр</p>
@@ -33,7 +36,7 @@ const Filter: React.FC = () => {
             onClick={() => handleFilterClick(filter)}
             className={`px-4 py-2 rounded-md ${
               activeFilter === filter
-                ? "bg-[#FCA311] text-white"
+                ? "bg-[#FCA311]"
                 : "bg-[#F3F3F3]"
             }`}
           >
@@ -113,7 +116,7 @@ const Filter: React.FC = () => {
           <input type="radio" name="commission" className="cursor-pointer" />
         </div>
         </div>
-        <button className="w-full py-3 font-semibold text-white bg-[#FCA311] rounded-md">
+        <button className="w-full py-3 font-semibold bg-[#FCA311] rounded-md">
           Применить
         </button>
       </div>

@@ -15,6 +15,14 @@ export const productApi = api.injectEndpoints({
       }),
       providesTags:["Product"]
     }),
+
+    getPageCreate: build.query({
+      query: ({limit, page}) => ({ 
+        url: `products/?limit=${limit}&page=${page}`,
+      }),
+      providesTags:["Product"]
+    }),
+
     createProduct: build.mutation({
       query: (body)=> ({
         url:"/products",
@@ -45,5 +53,6 @@ export const {
   useGetProductsQuery,
   useCreateProductMutation,
   useDeleteProductMutation,
+  useGetPageCreateQuery,
   useUpdateProductMutation
 } = productApi
