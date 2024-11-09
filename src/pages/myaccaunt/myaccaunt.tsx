@@ -8,11 +8,18 @@ import { FC } from "react";
 const ProfilePage: FC = () => {
   const navigate = useNavigate();
 
+
   const logoutHandler = () => {
-    // Faqat sessiya kalitini o'chirish
-    localStorage.removeItem("authToken"); // Bu yerda "authToken" ni o'zingiz foydalangan kalit nomi bilan almashtiring
+    localStorage.clear(); // Barcha localStorage ma'lumotlarini o'chirish
     navigate("/login"); // Login sahifasiga yo'naltirish
-};
+  };
+  
+
+//   const logoutHandler = () => {
+//     // Faqat sessiya kalitini o'chirish
+//     localStorage.removeItem("authToken"); // Bu yerda "authToken" ni o'zingiz foydalangan kalit nomi bilan almashtiring
+//     navigate("/login"); // Login sahifasiga yo'naltirish
+// };
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -70,8 +77,7 @@ const ProfilePage: FC = () => {
                   id="phone"
                   type="text"
                   placeholder="+998 99 895 90-95"
-                  className="mt-1 block w-[330px] p-2 outline-[#FCA311] border border-gray-300 rounded bg-gray-100 text-gray-500"
-                  disabled
+                  className="mt-1 block w-[330px] p-2 outline-[#FCA311] border border-gray-300 rounded bg-gray-100"
                 />
               </div>
 

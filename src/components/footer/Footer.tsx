@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         </div>
         <div>
           <h2 className="font-semibold text-lg mb-2">Наши Страницы</h2>
-          <div className="flex justify-center space-x-4 text-gray-500">
+          <div className="flex justify-center space-x-4  text-gray-500">
             <FaTelegramPlane className="hover:text-blue-500 cursor-pointer" />
             <FaYoutube className="hover:text-red-600 cursor-pointer" />
             <FaFacebookF className="hover:text-blue-800 cursor-pointer" />
