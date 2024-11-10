@@ -4,6 +4,7 @@ import { SuspenseComponent as Suspense } from "../utils";
 import notfound from "../assets/image.png";
 import Wishlist from "../pages/wishlist/Wishlist";
 import Login from "../auth/Login/Login";
+import RegisterForm from "../auth/Registeer/Register";
 
 const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 const About: LazyExoticComponent<any> = lazy(
@@ -88,14 +89,7 @@ const Routers = () => {
             </Suspense>
           ),
         },
-        {
-          path: "/login",
-          element: (
-            <Suspense>
-              <Login/>
-            </Suspense>
-          ),
-        },
+        
         {
           path: "/myaccaunt",
           element: (
@@ -105,6 +99,22 @@ const Routers = () => {
           ),
         },
       ],
+    },
+    {
+      path: "/login",
+      element: (
+        <Suspense>
+          <Login/>
+        </Suspense>
+      ),
+    },
+    {
+      path: "/register",
+      element: (
+        <Suspense>
+          <RegisterForm/>
+        </Suspense>
+      ),
     },
     {
       path: "*",

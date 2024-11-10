@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 const baseQuery = async (args: any, api: any, extraOptions: any) => {
   // const { dispatch } = api
   const rawBaseQuery = fetchBaseQuery({
-    baseUrl: "https://dummyjson.com/",
+    baseUrl: "https://66e01ed02fb67ac16f2868ab.mockapi.io/",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("x-auth-token")
       if (token) {

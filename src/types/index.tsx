@@ -3,8 +3,8 @@ export interface CounterState {
 }
 
 export interface Product{
-  id: number,
+  id: string,
   title: string,
   price: number
-  images: string[]
+  url: string[]
 }
